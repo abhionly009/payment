@@ -3,6 +3,7 @@ package com.agh.Payment.model;
 import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Positive;
+import jakarta.ws.rs.DefaultValue;
 
 import java.math.BigDecimal;
 
@@ -27,14 +28,14 @@ public class OrderCreatedEvent {
     private BigDecimal price;
 
     public String getPaymentType() {
-        return paymentType;
+        return type;
     }
 
-    public void setPaymentType(String paymentType) {
-        this.paymentType = paymentType;
+    public void setPaymentType(String type) {
+        this.type = type;
     }
 
-    private String paymentType;
+    private String type;
 
     public Long getOrderId() {
         return orderId;
