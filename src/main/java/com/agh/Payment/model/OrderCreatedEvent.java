@@ -1,11 +1,27 @@
 package com.agh.Payment.model;
 
-public class OrderCreatedEvent {
+import jakarta.validation.constraints.Min;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.Positive;
 
+public class OrderCreatedEvent {
+    @NotBlank(message = "Order id should be present for making payment")
     private Long orderId;
+
+    @NotBlank(message = "Product id is required for payment")
+    @Positive(message = "Product id must be valid")
     private Long productId;
+    @NotBlank(message = "User id must be there to process payment")
+    @Positive(message = "User id must be valid")
     private Long userId;
+
+    @NotBlank(message = "Quantity of ordered items should be there")
+    @Positive(message = "valid product quantity is required")
+    @Min(value = 1)
     private int quantity;
+
+    @NotBlank(message = "Total price of product should be there")
+    @Positive(message = "Price should be positive")
     private double price;
 
     public Long getOrderId() {
