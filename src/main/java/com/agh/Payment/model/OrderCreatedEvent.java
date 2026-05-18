@@ -4,6 +4,8 @@ import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Positive;
 
+import java.math.BigDecimal;
+
 public class OrderCreatedEvent {
     @NotBlank(message = "Order id should be present for making payment")
     private Long orderId;
@@ -22,7 +24,17 @@ public class OrderCreatedEvent {
 
     @NotBlank(message = "Total price of product should be there")
     @Positive(message = "Price should be positive")
-    private double price;
+    private BigDecimal price;
+
+    public String getPaymentType() {
+        return paymentType;
+    }
+
+    public void setPaymentType(String paymentType) {
+        this.paymentType = paymentType;
+    }
+
+    private String paymentType;
 
     public Long getOrderId() {
         return orderId;
@@ -56,11 +68,11 @@ public class OrderCreatedEvent {
         this.quantity = quantity;
     }
 
-    public double getPrice() {
+    public BigDecimal getPrice() {
         return price;
     }
 
-    public void setPrice(double price) {
+    public void setPrice(BigDecimal price) {
         this.price = price;
     }
 
