@@ -1,9 +1,12 @@
 package com.agh.Payment.controller;
 
+import com.agh.Payment.dto.PaymentRequestDTO;
 import com.agh.Payment.service.PaymentService;
+import jakarta.validation.Valid;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController("/payment")
@@ -17,11 +20,11 @@ public class PaymentController {
     }
 
 
-    @PostMapping("/pay/{orderId}/{amount}")
-    public ResponseEntity<String> makePayment(@PathVariable long orderId, @PathVariable  double amount){
-        String paymentStatus =  paymentService.makePayment(amount);
-        return ResponseEntity.ok(paymentStatus);
-    }
+//    @PostMapping("/pay")
+//    public ResponseEntity<String> makePayment(@Valid @RequestBody PaymentRequestDTO requestDTO){
+//        String paymentStatus =  paymentService.makePayment(requestDTO);
+//        return ResponseEntity.ok(paymentStatus);
+//    }
 
     @PostMapping("/refund")
     public ResponseEntity<String> processRefund(long orderId){
