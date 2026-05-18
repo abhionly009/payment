@@ -8,8 +8,6 @@ import jakarta.persistence.Id;
 @Entity
 public class Payment {
 
-
-
     private String type;
     private double amount;
 
