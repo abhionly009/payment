@@ -12,7 +12,7 @@ public class VoucherPayment implements Payment{
 
 
     @Override
-    public PaymentResult pay(BigDecimal amount) {
+    public PaymentResult pay(double amount) {
         return new PaymentResult(
                 "Voucher payment successful",
                 PaymentStatus.SUCCESS,

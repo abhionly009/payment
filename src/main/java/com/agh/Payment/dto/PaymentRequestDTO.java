@@ -10,7 +10,7 @@ public class PaymentRequestDTO {
     private String type;
 
     @Positive(message = "Amount should be positive")
-    private BigDecimal amount;
+    private double amount;
 
     @NotBlank(message = "In order to process payment order Id is required")
     @Positive(message = "Order id should be positive")
@@ -31,11 +31,11 @@ public class PaymentRequestDTO {
         this.type = type;
     }
 
-    public BigDecimal getAmount() {
+    public double getAmount() {
         return amount;
     }
 
-    public void setAmount(BigDecimal amount) {
+    public void setAmount(double amount) {
         this.amount = amount;
     }
 
