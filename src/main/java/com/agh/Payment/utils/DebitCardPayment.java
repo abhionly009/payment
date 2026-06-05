@@ -9,7 +9,7 @@ import java.util.UUID;
 @Component
 public class DebitCardPayment implements Payment{
     @Override
-    public PaymentResult pay(BigDecimal amount) {
+    public PaymentResult pay(double amount) {
         return new PaymentResult(
                 "Debit card payment successful",
                 PaymentStatus.SUCCESS,

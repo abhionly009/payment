@@ -1,5 +1,6 @@
-package com.agh.Payment.model;
+package com.agh.Payment.entity;
 
+import com.agh.Payment.model.PaymentStatus;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -14,12 +15,12 @@ import java.time.LocalDateTime;
 public class PaymentDetails {
 
     private String type;
-    private BigDecimal amount;
+    private double amount;
     private long orderId;
 
     private Long userId;
 
-    public void setAmount(BigDecimal amount) {
+    public void setAmount(double amount) {
         this.amount = amount;
     }
 
@@ -105,7 +106,7 @@ public class PaymentDetails {
     public PaymentDetails() {
     }
 
-    public PaymentDetails(String type, BigDecimal amount, long id) {
+    public PaymentDetails(String type, double amount, long id) {
         this.type = type;
         this.amount = amount;
         this.id = id;
@@ -119,7 +120,7 @@ public class PaymentDetails {
         this.type = type;
     }
 
-    public BigDecimal getAmount() {
+    public double getAmount() {
         return amount;
     }
 

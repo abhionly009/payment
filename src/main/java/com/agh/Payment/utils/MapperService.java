@@ -2,7 +2,7 @@ package com.agh.Payment.utils;
 
 import com.agh.Payment.dto.PaymentRequestDTO;
 import com.agh.Payment.model.OrderCreatedEvent;
-import com.agh.Payment.model.PaymentDetails;
+import com.agh.Payment.entity.PaymentDetails;
 import com.agh.Payment.model.PaymentStatus;
 import org.springframework.stereotype.Component;
 
@@ -14,7 +14,7 @@ public class MapperService {
     public PaymentRequestDTO eventToPaymentRequestDTO(OrderCreatedEvent event){
 
         PaymentRequestDTO paymentRequestDTO = new PaymentRequestDTO();
-        paymentRequestDTO.setAmount(event.getPrice().multiply(BigDecimal.valueOf(event.getQuantity())));
+//        paymentRequestDTO.setAmount(event.getPrice() * event.getQuantity());
         paymentRequestDTO.setOrderId(event.getOrderId());
         paymentRequestDTO.setUserId(event.getUserId());
         paymentRequestDTO.setType(event.getPaymentType());

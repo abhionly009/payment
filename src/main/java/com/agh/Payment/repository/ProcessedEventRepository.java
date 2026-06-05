@@ -1,9 +1,9 @@
 package com.agh.Payment.repository;
 
-import com.agh.Payment.entity.PaymentDetails;
+import com.agh.Payment.entity.PaymentEvent;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface PaymentRepository extends JpaRepository<PaymentDetails,Long> {
+public interface ProcessedEventRepository extends JpaRepository<PaymentEvent, String> {
 }

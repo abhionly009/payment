@@ -1,7 +1,7 @@
 package com.agh.Payment.service;
 
 import com.agh.Payment.dto.PaymentRequestDTO;
-import com.agh.Payment.model.PaymentDetails;
+import com.agh.Payment.entity.PaymentDetails;
 import com.agh.Payment.model.PaymentResult;
 import com.agh.Payment.model.PaymentStatus;
 import com.agh.Payment.model.PaymentType;
@@ -10,7 +10,6 @@ import com.agh.Payment.utils.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.math.BigDecimal;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -41,14 +40,9 @@ public class PaymentService {
         if (type== null){
             return paymentMethods.get(PaymentType.UPI);
         }
-        if (type.toUpperCase().equals(PaymentType.DEBIT)){
-            return paymentMethods.get(PaymentType.DEBIT);
-        } if (type.toUpperCase().equals(PaymentType.CREDIT)){
-            return   paymentMethods.get(PaymentType.CREDIT);
-        } if (type.toUpperCase().equals(PaymentType.UPI)){
-            return   paymentMethods.get(PaymentType.UPI);
-        }
-        return null;
+        PaymentType paymentType = PaymentType.valueOf(type.toUpperCase());
+
+        return paymentMethods.get(paymentType);
     }
 
 
@@ -72,6 +66,7 @@ public class PaymentService {
         repository.save(paymentDetails);
         if (result.getStatus().equals(PaymentStatus.SUCCESS)){
             // create event to update inventory
+            System.err.println("Payment was successful...");
         }
 
     }

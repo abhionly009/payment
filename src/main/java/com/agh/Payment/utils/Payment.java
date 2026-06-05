@@ -5,5 +5,5 @@ import com.agh.Payment.model.PaymentResult;
 import java.math.BigDecimal;
 
 public interface Payment {
-     PaymentResult pay(BigDecimal amount);
+     PaymentResult pay(double amount);
 }
