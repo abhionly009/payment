@@ -10,6 +10,8 @@ import org.apache.avro.generic.GenericRecord;
 import org.apache.kafka.clients.consumer.internals.Acknowledgements;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.kafka.annotation.KafkaListener;
+import org.springframework.kafka.annotation.RetryableTopic;
+import org.springframework.retry.annotation.Backoff;
 import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
@@ -26,6 +28,10 @@ public class PaymentListener {
     @Autowired
     ProcessedEventRepository processedEventRepository;
 
+    @RetryableTopic(attempts = "3",
+            backoff = @Backoff(delay = 2000),
+            dltTopicSuffix = "-dlt"
+    )
     @KafkaListener(topics = "order-created", groupId = "payment-group-v2")
     public void handleOrderCreated(GenericRecord event) {
 
@@ -54,6 +60,16 @@ public class PaymentListener {
        requestDTO.setAmount(amount);
        requestDTO.setCurrency(currency);
        paymentService.makePayment(requestDTO);
+
+        /**
+         * This code is here to simulate crash so that when consumer
+         * restart it receive event from kafka broker and try to process payment again
+         * since processed event was not successful payment will deduct once again, Retry-able
+         * topic will retry for 3 attempts if not succeed a new topic will be created by name
+         * order-created-dlt, which will be letter inspect by concerned team re attempted and if not
+         * success then audit it.
+         */
+//        System.exit(1);
 
        processedEventRepository.save(new PaymentEvent(eventId));
 //       System.exit(1);
